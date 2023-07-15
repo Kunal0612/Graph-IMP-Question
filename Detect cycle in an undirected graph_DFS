@@ -1,0 +1,25 @@
+Using DFSSSSS
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool f(vector<int> adj[],int s,int par,int vis[]){
+        vis[s]=1;
+        for(auto x:adj[s]){
+            if(!vis[x]){
+                if(f(adj,x,s,vis)) return true;
+            }
+            else if(x!=par) return true;
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        int vis[V+1]={0};
+        for(int i=0;i<V;i++){
+            if(!vis[i] and f(adj,i,-1,vis)) return true;
+        }
+        return false;
+    }
+};
+
+lk
