@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    // Function to detect cycle in an undirected graph.
+    bool f(vector<int> adj[],int s,int vis[]){
+        queue<pair<int,int>> q;
+        q.push({s,-1});
+        vis[s]=1;
+        while(!q.empty()){
+            auto xn=q.front();
+            q.pop();
+            for(auto x:adj[xn.first]){
+                if(!vis[x]){
+                    vis[x]=1;
+                    q.push({x,xn.first});
+                }
+                else if(x!=xn.second) return true;
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        int vis[V+1]={0};
+        for(int i=0;i<V;i++){
+            if(!vis[i] and f(adj,i,vis)) return true;
+        }
+        return false;
+    }
+};
